@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  backend-tests:
+  flask-app-ci:
     runs-on: ubuntu-latest
     steps:
       #----------------------------------------------
@@ -41,7 +41,6 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            flask-app/.venv
             ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('flask-app/poetry.lock') }}
           restore-keys: |
