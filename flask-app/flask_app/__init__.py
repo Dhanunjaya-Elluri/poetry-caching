@@ -16,4 +16,8 @@ def create_app():
     def hello():
         return "Hello, World!"
 
+    @app.route("/hello/jay")
+    def hello_jay():
+        return "Hello, Jay!"
+
     return app
