@@ -1,0 +1,40 @@
+repos:
+  # Sync versions from pyproject.toml
+  - repo: https://github.com/floatingpurr/sync_with_poetry
+    rev: "1.1.0"
+    hooks:
+      - id: sync_with_poetry
+
+  # precommit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-json
+      - id: check-toml
+
+  # black, isort, ruff
+  - repo: local
+    hooks:
+      - id: black
+        name: black
+        entry: poetry run black .
+        language: system
+        types: [python]
+        working_dir: backend
+      - id: isort
+        name: isort
+        entry: poetry run isort .
+        language: system
+        types: [python]
+        working_dir: backend
+      - id: ruff
+        name: ruff
+        entry: poetry run ruff .
+        language: system
+        types: [python]
+        working_dir: backend
