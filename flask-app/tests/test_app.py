@@ -28,3 +28,8 @@ def test_index(client):
 def test_hello_world(client):
     response = client.get("/helloworld")
     assert response.data == b"Hello, World!"
+
+
+def test_hello(client):
+    response = client.get("/hello")
+    assert response.data == b"Hello, World!"

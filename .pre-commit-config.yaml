@@ -34,7 +34,7 @@ repos:
         working_dir: backend
       - id: ruff
         name: ruff
-        entry: bash -c "cd flask-app && poetry run ruff"
+        entry: bash -c "cd flask-app && poetry run ruff ."
         language: system
         types: [python]
         working_dir: backend

@@ -67,3 +67,11 @@ jobs:
         working-directory: flask-app
         run: |
           poetry run ruff check .
+
+      #----------------------------------------------
+      #        Run tests
+      #----------------------------------------------
+      - name: Run tests
+        working-directory: flask-app
+        run: |
+          poetry run pytest
