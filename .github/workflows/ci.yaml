@@ -1,0 +1,69 @@
+name: git
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      #----------------------------------------------
+      #       check-out repo & set up python
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      #----------------------------------------------
+      #       Install & set config for poetry
+      #----------------------------------------------
+      - name: Install and Configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      #----------------------------------------------
+      #       Load cached venv if exists
+      #----------------------------------------------
+      - name: Load cached venv if exists
+        uses: actions/cache@v2
+        with:
+          path: |
+            flask-app/.venv
+            ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('flask-app/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      #----------------------------------------------
+      #        Install dependencies if no cache
+      #----------------------------------------------
+      - name: Install dependencies
+        working-directory: flask-app
+        run: |
+          poetry install
+
+      #----------------------------------------------
+      #        Run formatting and linting
+      #----------------------------------------------
+      - name: Format check with black
+        working-directory: flask-app
+        run: |
+          poetry run black --check .
+
+      - name: Lint check with ruff
+        working-directory: flask-app
+        run: |
+          poetry run ruff check .
