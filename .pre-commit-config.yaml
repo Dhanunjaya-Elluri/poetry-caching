@@ -22,19 +22,19 @@ repos:
     hooks:
       - id: black
         name: black
-        entry: poetry run black .
+        entry: bash -c "cd flask-app && poetry run black ."
         language: system
         types: [python]
         working_dir: backend
       - id: isort
         name: isort
-        entry: poetry run isort .
+        entry: bash -c "cd flask-app && poetry run isort ."
         language: system
         types: [python]
         working_dir: backend
       - id: ruff
         name: ruff
-        entry: poetry run ruff .
+        entry: bash -c "cd flask-app && poetry run ruff"
         language: system
         types: [python]
         working_dir: backend
