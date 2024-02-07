@@ -1,12 +1,9 @@
-name: backend-ci
+name: CI
 
 on:
   push:
     branches:
       - master
-    paths:
-      - flask-app/**
-      - frontend/**
   pull_request:
     branches:
       - main
