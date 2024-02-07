@@ -28,7 +28,7 @@ jobs:
       #       Install & set config for poetry
       #----------------------------------------------
       - name: Install and Configure Poetry
-        uses: abatilo/actions-poetry@v2 # snok/install-poetry@v1
+        uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
@@ -43,7 +43,9 @@ jobs:
         with:
           path: |
             flask-app/.venv
-          key: venv-${{ hashFiles('flask-app/poetry.lock') }}
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-
 
       #----------------------------------------------
       #        Install dependencies if no cache
@@ -52,7 +54,7 @@ jobs:
         working-directory: flask-app
         if: steps.load-cached-venv-if-exists.outputs.cache-hit != 'true'
         run: |
-          poetry install
+          poetry install --no-interaction
 
       #----------------------------------------------
       #        Run formatting and linting
