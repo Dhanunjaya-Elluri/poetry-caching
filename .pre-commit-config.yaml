@@ -30,8 +30,8 @@ repos:
         entry: bash -c "cd flask-app && poetry run ruff ."
         language: system
         types: [python]
-      - id: run_tests
-        name: run_tests
+      - id: pytest
+        name: pytest
         entry: bash -c "cd flask-app && poetry run pytest"
         language: system
         types: [python]
