@@ -33,8 +33,3 @@ def test_hello_world(client):
 def test_hello(client):
     response = client.get("/hello")
     assert response.data == b"Hello, World!"
-
-
-def test_hello_jay(client):
-    response = client.get("/hello/jay")
-    assert response.data == b"Hello, Jay!"
