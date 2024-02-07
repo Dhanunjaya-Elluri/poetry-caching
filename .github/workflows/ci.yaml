@@ -51,8 +51,9 @@ jobs:
       #----------------------------------------------
       - name: Install dependencies
         working-directory: flask-app
+        if: steps.load-cached-venv-if-exists.outputs.cache-hit != 'true'
         run: |
-          poetry install
+          poetry install --no-interaction
 
       #----------------------------------------------
       #        Run formatting and linting
