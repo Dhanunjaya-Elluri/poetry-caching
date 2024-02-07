@@ -34,19 +34,22 @@ This is a simple example of how to use poetry to cache dependencies in a CI/CD p
 
 Now, whenever you do git commit ..., it will run the poetry run python -m black ... command like this:
 
-    ```bash
-    $ git commit -m "Test commit"
-    Sync with Poetry.....................................(no files to check)Skipped
-    Trim Trailing Whitespace.................................................Passed
-    Fix End of Files.........................................................Passed
-    Check Yaml...............................................................Passed
-    Check for added large files..............................................Passed
-    Check for merge conflicts................................................Passed
-    Check JSON...........................................(no files to check)Skipped
-    Check Toml...........................................(no files to check)Skipped
-    black................................................(no files to check)Skipped
-    isort................................................(no files to check)Skipped
-    ruff.................................................(no files to check)Skipped
-    [master 6d15ea8] feat: flask-app/.venv in CI
-     1 file changed, 1 insertion(+)
-    ```
+ ```bash
+ git commit -m "Test commit"
+ ```
+
+ ```bash
+ Sync with Poetry.....................................(no files to check)Skipped
+ Trim Trailing Whitespace.................................................Passed
+ Fix End of Files.........................................................Passed
+ Check Yaml...............................................................Passed
+ Check for added large files..............................................Passed
+ Check for merge conflicts................................................Passed
+ Check JSON...........................................(no files to check)Skipped
+ Check Toml...........................................(no files to check)Skipped
+ black................................................(no files to check)Skipped
+ isort................................................(no files to check)Skipped
+ ruff.................................................(no files to check)Skipped
+ [master 6d15ea8] feat: flask-app/.venv in CI
+  1 file changed, 1 insertion(+)
+ ```
