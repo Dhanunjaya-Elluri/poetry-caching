@@ -38,3 +38,9 @@ repos:
         language: system
         types: [python]
         working_dir: backend
+      - id: run_tests
+        name: run_tests
+        entry: bash -c "cd flask-app && poetry run pytest"
+        language: system
+        types: [python]
+        working_dir: backend
