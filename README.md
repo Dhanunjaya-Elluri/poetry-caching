@@ -1,4 +1,4 @@
-# poetry-caching
+# Poetry and Docker Caching in Github Actions
 
 This is a simple example of how to use poetry to cache dependencies in a CI/CD pipeline.
 
