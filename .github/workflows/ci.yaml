@@ -39,22 +39,19 @@ jobs:
       #----------------------------------------------
       - name: Load cached venv if exists
         id: load-cached-venv-if-exists
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             flask-app/.venv
-          key: ${{ runner.os }}-poetry-${{ hashFiles('flask-app/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-poetry-
+          key: venv-${{ hashFiles('flask-app/poetry.lock') }}
 
       #----------------------------------------------
       #        Install dependencies if no cache
       #----------------------------------------------
       - name: Install dependencies
         working-directory: flask-app
-        if: steps.load-cached-venv-if-exists.outputs.cache-hit != 'true'
         run: |
-          poetry install --no-interaction
+          poetry install
 
       #----------------------------------------------
       #        Run formatting and linting
