@@ -78,9 +78,50 @@ jobs:
         run: |
           poetry run ruff check .
 
-# Run docker-ci if backend-ci is successful
+  frontend-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            frontend
+          sparse-checkout-cone-mode: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+              ${{ runner.os }}-node-
+
+      - name: Install npm dependencies
+        working-directory: frontend
+        run: |
+          npm install
+          npm install --save-dev --save-exact prettier
+
+      - name: Run prettier check
+        working-directory: frontend
+        run: |
+          npx prettier --check .
+        continue-on-error: true
+
+      - name: Run eslint check
+        working-directory: frontend
+        run: |
+          npx eslint --ext .js,.jsx,.ts,.tsx . --quiet
+        continue-on-error: true
+
+# Run docker-ci if both backend-ci and frontend-ci are successful
   docker-ci:
-    needs: backend-ci
+    needs: [backend-ci, frontend-ci]
     runs-on: ubuntu-latest
     steps:
       #----------------------------------------------
