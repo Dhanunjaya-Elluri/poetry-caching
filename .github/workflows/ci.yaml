@@ -57,6 +57,11 @@ jobs:
       #----------------------------------------------
       #        Run formatting and linting
       #----------------------------------------------
+      - name: Format check with isort
+        working-directory: flask-app
+        run: |
+          poetry run isort --check .
+
       - name: Format check with black
         working-directory: flask-app
         run: |
@@ -66,6 +71,7 @@ jobs:
         working-directory: flask-app
         run: |
           poetry run ruff check .
+
 
       #----------------------------------------------
       #        Set up docker cache
