@@ -2,8 +2,7 @@ name: docker-ci
 
 on:
   workflow_run:
-    workflows:
-      - backend-ci
+    workflows: [backend-ci]
     types:
       - completed
   push:
