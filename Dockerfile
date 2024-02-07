@@ -12,6 +12,9 @@ RUN pip install poetry
 # Install the dependencies
 RUN poetry config virtualenvs.create false && poetry install --no-interaction
 
+# RUN tests
+RUN poetry run pytest
+
 # Expose 5000 port
 EXPOSE 5000
 
