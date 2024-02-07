@@ -17,6 +17,10 @@ jobs:
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            flask-app
+          sparse-checkout-cone-mode: false
 
       - name: Set up Python 3.11
         id: setup-python
