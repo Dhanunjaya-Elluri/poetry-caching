@@ -32,7 +32,7 @@ This is a simple example of how to use poetry to cache dependencies in a CI/CD p
     poetry run pre-commit install
     ```
 
-Now, whenever you do git commit ..., it will run the poetry run python -m black ... command like this:
+Now, whenever you do `git commit` command, it will run the `poetry run python -m black` ... command like this:
 
  ```bash
  git commit -m "Test commit"
