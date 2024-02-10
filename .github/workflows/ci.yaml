@@ -96,25 +96,25 @@ jobs:
       - name: Cache npm dependencies
         uses: actions/cache@v2
         with:
-          path: frontend/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
+          path: front-end/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('front-end/package-lock.json') }}
           restore-keys: |
               ${{ runner.os }}-node-
 
       - name: Install npm dependencies
-        working-directory: frontend
+        working-directory: front-end
         run: |
           npm install
           npm install --save-dev --save-exact prettier
 
       - name: Run prettier check
-        working-directory: frontend
+        working-directory: front-end
         run: |
           npx prettier --check .
         continue-on-error: true
 
       - name: Run eslint check
-        working-directory: frontend
+        working-directory: front-end
         run: |
           npx eslint --ext .js,.jsx,.ts,.tsx . --quiet
         continue-on-error: true
